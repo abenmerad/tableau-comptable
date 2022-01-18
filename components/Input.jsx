@@ -1,16 +1,16 @@
 import classNames from "classnames"
 
 const Input = (props) => {
-  const { className, ...otherProps } = props;
+  const { className, ...otherProps } = props
 
   return (
     <input
       {...otherProps}
       className={classNames(
         "form-control",
-        props.className
+         className
       )}
     />
-  );
-};
-export default Input;
+  )
+}
+export default Input
