@@ -1,4 +1,4 @@
-import { createContext, useCallback, useState } from "react"
+import { createContext, useCallback, useState, useEffect } from "react"
 
 const initialBalanceSheet = [
   {
@@ -14,15 +14,30 @@ const initialBalanceSheet = [
     amount: 50,
   },
 ]
-
+if (typeof window !== 'undefined') {
+  window.sessionStorage.setItem("balanceSheet", JSON.stringify(initialBalanceSheet))
+} 
 const BalanceContext = createContext(initialBalanceSheet)
 
 export const BalanceContextProvider = (props) => {
   const [balance, setBalance] = useState(initialBalanceSheet)
-  const addBalanceItem = useCallback((newBalance) => {
-    setBalance((currentBalance) => currentBalance.push(newBalance))
-  }, []) 
 
-return <BalanceContext.Provider {...props} value={{ balance, addBalanceItem }} />
+  useEffect(() => {
+    setBalance(JSON.parse(window.sessionStorage.getItem("balanceSheet")));
+  }, []);
+
+  useEffect(() => {
+    window.sessionStorage.setItem("balanceSheet", JSON.stringify(balance));
+  }, [balance]);
+
+  const addBalanceItem = useCallback((newBalance) => {
+    setBalance(currentBalance => [...currentBalance, newBalance])
+  }, [balance])
+
+  return (
+    <BalanceContext.Provider value={{ balance, addBalanceItem }}>
+      {props.children}
+    </BalanceContext.Provider>
+  )
 }
 export default BalanceContext

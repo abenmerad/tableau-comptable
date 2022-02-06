@@ -5,7 +5,7 @@ import "../styles/Home.module.css"
 import {BalanceContextProvider } from "../components/BalanceContext"
 
 
-const App = () => {
+const Home = () => {
   return (
     <BalanceContextProvider>
       <Navbar />
@@ -13,4 +13,4 @@ const App = () => {
     </BalanceContextProvider>
   )
 }
-export default App
+export default Home

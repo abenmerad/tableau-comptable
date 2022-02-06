@@ -16,7 +16,7 @@ const BalanceSheet = () => {
         </thead>
         <tbody>
           {Object.entries(balance).map(([itemId, { description, amount }]) => {
-            return <tr key={itemId.key} className="fw-bold">
+            return <tr key={Math.random()} className="fw-bold">
               <td className="flex-row">
                 <p className="text-success">{amount > 0 ? description + ", " + amount + "€" : ""}</p>
               </td>

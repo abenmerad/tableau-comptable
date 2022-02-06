@@ -16,12 +16,10 @@ const validationSchema = yup.object().shape({
 })
 
 const FormApp = () => {
-  const {addBalanceItem} = useContext(BalanceContext)
+  const { addBalanceItem } = useContext(BalanceContext)
 
   const handleFormSubmit = useCallback(async (values) => {
-    const {description, amount} = values
-    addBalanceItem({"description": description, "amount": amount})
-    
+    addBalanceItem(values)
     return true
   }, [addBalanceItem])
 
